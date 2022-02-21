@@ -37,31 +37,35 @@ print("Welcome to the Coffee Shop!")
 
 def check_resources(order_ingredients):
     """Checks to see if enough resources to make drink. Returns True or False."""
-    for ingredient in order_ingredients:
-        if order_ingredients["item"] >= resources["item"]:
-            print(f"Sorry, there is not enough {ingredient} for that drink.")
+    for item in order_ingredients:
+        if order_ingredients[item] >= resources[item]:
+            print(f"Sorry, there is not enough {item} for that drink.")
             return False
     return True
 
 
 def calculate_coins():
     """Calculates coins inserted and dispenses change to user"""
-    input("Please insert coins.")
-    quarters = int(input("How many quarters do you have?"))
-    dimes = int(input("How many dimes do you have?"))
-    nickels = int(input("How many nickels do you have?"))
-    pennies = int(input("How many pennies do you have?"))
-    total = float((quarters * .25) + (dimes * .1) + (nickels * .05) + (pennies * .01))
+    print("Please insert coins.")
+    quarters = int(input("How many quarters do you have?")) * .25
+    dimes = int(input("How many dimes do you have?")) * .1
+    nickels = int(input("How many nickels do you have?")) * .05
+    pennies = int(input("How many pennies do you have?")) *.01
+    total = float(quarters + dimes + nickels + pennies)
     return total
 
 
-def successful_transaction(user_total, drink_total):
+def successful_transaction(money_given, drink_total):
     """Checks to see if payment is accepted, returns False if insufficient funds"""
-    drink_total = drink["cost"]
-    if user_total > drink_total:
-        change = user_total - drink_total
-        profit_so_far -= change
-        print(f"Your change is {change}.")
+    if money_given >= drink_total:
+        global profit_so_far
+        profit_so_far += drink_total
+        change = round(money_given - drink_total, 2)
+        print(f"Your change is ${change}.")
+        return True
+    else:
+        print("Sorry, not enough money.")
+        return False
 
 
 coffee_machine = True
@@ -78,5 +82,6 @@ while coffee_machine:
         print(f"Money: ${profit_so_far}")
     else:
         drink = MENU[choice]
-        if check_resources(drink['ingredients']):
+        if check_resources(drink["ingredients"]):
             user_total = calculate_coins()
+            successful_transaction(user_total, drink["cost"])
