@@ -1,3 +1,5 @@
+from art import logo
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -32,6 +34,7 @@ resources = {
     "coffee": 100,
 }
 
+print(logo)
 print("Welcome to the Coffee Shop!")
 
 
@@ -47,10 +50,10 @@ def check_resources(order_ingredients):
 def calculate_coins():
     """Calculates coins inserted and dispenses change to user"""
     print("Please insert coins.")
-    quarters = int(input("How many quarters do you have?")) * .25
-    dimes = int(input("How many dimes do you have?")) * .1
-    nickels = int(input("How many nickels do you have?")) * .05
-    pennies = int(input("How many pennies do you have?")) * .01
+    quarters = int(input("How many quarters do you have? ")) * .25
+    dimes = int(input("How many dimes do you have? ")) * .1
+    nickels = int(input("How many nickels do you have? ")) * .05
+    pennies = int(input("How many pennies do you have? ")) * .01
     total = float(quarters + dimes + nickels + pennies)
     return total
 
