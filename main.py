@@ -37,12 +37,24 @@ print("Welcome to the Coffee Shop!")
 def check_resources(order_ingredients):
     for ingredient in order_ingredients:
         if order_ingredients["item"] >= resources["item"]:
-            print(f"Sorry, there is not enough {item} for that drink.")
+            print(f"Sorry, there is not enough {ingredient} for that drink.")
             return False
     return True
 
 def calculate_coins():
+    drink_total = drink["cost"]
     input("Please insert coins.")
+    quarters = int(input("How many quarters do you have?"))
+    dimes = int(input("How many dimes do you have?") )
+    nickels = int(input("How many nickels do you have?"))
+    pennies = int(input("How many pennies do you have?"))
+    total = float((quarters * .25) + (dimes * .1) + (nickels * .05) + (pennies * .01))
+    if total > drink_total:
+        change = total - drink_total
+        profit_so_far =- change
+        print(f"Your change is {change}.")
+
+
 
 coffee_machine = True
 
@@ -58,3 +70,5 @@ while coffee_machine:
     else:
         drink = MENU[choice]
         if check_resources(drink['ingredients']):
+            calculate_coins()
+
