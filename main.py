@@ -34,6 +34,16 @@ resources = {
 
 print("Welcome to the Coffee Shop!")
 
+def check_resources(order_ingredients):
+    for ingredient in order_ingredients:
+        if order_ingredients["item"] >= resources["item"]:
+            print(f"Sorry, there is not enough {item} for that drink.")
+            return False
+    return True
+
+def calculate_coins():
+    input("Please insert coins.")
+
 coffee_machine = True
 
 while coffee_machine:
@@ -45,3 +55,6 @@ while coffee_machine:
         print(f"Milk: {resources['milk']}ml")
         print(f"Coffee: {resources['coffee']}g")
         print(f"Money: ${profit_so_far}")
+    else:
+        drink = MENU[choice]
+        if check_resources(drink['ingredients']):
